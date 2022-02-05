@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <section id="todolist">
+        <!-- header -->
+        <h1>My Notes</h1>
+        <input type="text" class="text" placeholder="input here" @keyup.enter="add" v-model="content">
+        <!-- main -->
+        <ul class="list">
+            <li v-for="(item,index) in list"><span class="index">{{index + 1 + '.'}}</span>{{item}}
+                <a href="javascript:;" class="remove" @click="remove"></a>
+            </li>
+        </ul>
+        <!-- total & clear -->
+        <footer v-if="list.length > 0">
+            <div class="left">{{list.length}} items left</div>
+            <div class="right">
+                <a href="javascript:;" @click="clearAll">Clear</a>
+            </div>
+        </footer>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var todilist = new Vue({
+            el: '#todolist',
+            data: {
+                list: ['content1', 'content2', 'content3', 'content4', 'content5'],
+                content: '',
+            },
+            methods: {
+                add: function() {
+                    this.list.push(this.content);
+                },
+                remove: function() {
+                    this.list.shift(this.list[this.index])
+                },
+                clearAll: function() {
+                    this.list = [];
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
